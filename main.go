@@ -9,7 +9,7 @@ import (
 	"os"
 )
 
-const filePermission = 0644
+// const filePermission = 0644
 
 type Arguments map[string]string
 
