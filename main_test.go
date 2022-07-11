@@ -8,7 +8,8 @@ import (
 )
 
 const fileName = "test.json"
-const filePermission = 0644
+
+//const filePermission = 0644
 
 // Common validation tests
 func TestOperationMissingError(t *testing.T) {
@@ -105,7 +106,7 @@ func TestListOperation(t *testing.T) {
 		t.Error(err)
 	}
 	defer file.Close()
-	
+
 	bytes, err := ioutil.ReadAll(file)
 	if err != nil {
 		t.Error(err)
