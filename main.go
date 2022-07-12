@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"errors"
+	"flag"
 	"fmt"
 	"io"
 	"os"
@@ -207,4 +208,34 @@ func findById(id, fileName string, writer io.Writer) error {
 	}
 
 	return nil
+}
+
+func main() {
+	// A string flag.
+	operation := flag.String("operation", "defaultOperation", "")
+	item := flag.String("item", "defauldItem", "")
+	fileName := flag.String("fileName", "defaultFileName", "")
+	flag.Parse()
+
+	m := ItemT{}
+
+	b := []byte(*item)
+	err := json.Unmarshal(b, &m)
+	if err != nil {
+		fmt.Println(err)
+	}
+	args := Arguments{
+		"id":        m.Id,
+		"operation": *operation,
+		"item":      *item,
+		"fileName":  *fileName,
+	}
+
+	// fmt.Println(m)
+	// fmt.Println(*item)
+
+	err = Perform(args, os.Stdout)
+	if err != nil {
+		panic(err)
+	}
 }
